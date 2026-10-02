@@ -1,0 +1,247 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+    background: #20b9ae;
+    color: #0e3835;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.game {
+    position: relative;
+    width: min(92vw, 430px);
+    text-align: center;
+    padding: 10px 0;
+}
+
+h1 {
+    margin: 10px 0 2px;
+    font-size: 38px;
+    letter-spacing: 2px;
+}
+
+.subtitle {
+    color: #e9fffd;
+    font-weight: bold;
+    margin-bottom: 12px;
+}
+
+#soundBtn {
+    position: absolute;
+    top: 6px;
+    right: 0;
+    width: 40px;
+    height: 40px;
+    border: 0;
+    border-radius: 50%;
+    background: #8de1da;
+    font-size: 20px;
+    cursor: pointer;
+    transition: 0.12s;
+}
+
+#soundBtn:hover {
+    background: #b5f0eb;
+}
+
+#soundBtn:active {
+    transform: scale(0.9);
+}
+
+#status {
+    background: #8de1da;
+    padding: 12px;
+    border-radius: 12px;
+    font-weight: bold;
+    margin-bottom: 12px;
+    min-height: 44px;
+}
+
+.scoreboard {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.scoreboard div {
+    background: #17a89d;
+    color: white;
+    padding: 7px;
+    border-radius: 10px;
+}
+
+.scoreboard span {
+    display: block;
+    font-size: 12px;
+}
+
+.scoreboard strong {
+    display: block;
+    font-size: 20px;
+}
+
+/* ---------- เวทีบ้านของแมลงวัน ---------- */
+.fly-stage {
+    height: 100px;
+    margin-bottom: 10px;
+    position: relative;
+    background:
+        radial-gradient(circle, #22b3a8 1.5px, transparent 1.6px) 0 0 / 26px 26px,
+        #1a9f95;
+    border-radius: 18px;
+    overflow: hidden;
+}
+
+.fly-name {
+    position: absolute;
+    bottom: 7px;
+    width: 100%;
+    font-size: 11px;
+    font-weight: bold;
+    color: #e9fffd;
+}
+
+/* ---------- ตัวแมลงวัน (บินอยู่เหนือทั้งเกม) ---------- */
+#fly {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    z-index: 20;
+    pointer-events: none;
+    font-size: 44px;
+    line-height: 1;
+    transform: translate(-50%, -50%);
+    transition-property: left, top;
+    transition-duration: 700ms;
+    transition-timing-function: cubic-bezier(0.45, 0.05, 0.3, 1);
+    filter: drop-shadow(0 6px 4px rgba(0, 0, 0, 0.25));
+}
+
+#flyBody {
+    display: inline-block;
+    animation: idleBob 1.4s ease-in-out infinite;
+}
+
+#fly.flying #flyBody {
+    animation: buzzJitter 0.08s linear infinite;
+}
+
+#fly.happy #flyBody {
+    animation: happyHop 0.45s ease-in-out infinite;
+}
+
+#fly.sad #flyBody {
+    animation: none;
+    transform: rotate(180deg);
+}
+
+@keyframes idleBob {
+    0%, 100% { transform: translateY(-2px) rotate(-4deg); }
+    50%      { transform: translateY(3px) rotate(4deg); }
+}
+
+@keyframes buzzJitter {
+    0%   { transform: translate(-1px, 1px) rotate(-6deg); }
+    50%  { transform: translate(1px, -1px) rotate(6deg); }
+    100% { transform: translate(-1px, 1px) rotate(-6deg); }
+}
+
+@keyframes happyHop {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50%      { transform: translateY(-14px) scale(1.12) rotate(10deg); }
+}
+
+/* ---------- กระดาน ---------- */
+.board {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    background: #159b93;
+    padding: 8px;
+    border-radius: 16px;
+}
+
+.cell {
+    aspect-ratio: 1;
+    border: 0;
+    border-radius: 12px;
+    background: #2fcfc3;
+    font-size: clamp(48px, 15vw, 70px);
+    font-weight: bold;
+    color: #0f3f3c;
+    cursor: pointer;
+    transition: background 0.12s, transform 0.12s;
+}
+
+.cell:hover {
+    background: #63e3d9;
+}
+
+.cell:active {
+    transform: scale(0.94);
+}
+
+.cell.o {
+    color: #fffbe6;
+}
+
+.cell.win {
+    background: #ffe27a;
+    color: #0f3f3c;
+}
+
+/* ช่องที่แมลงวันเลือกไว้ กำลังบินไปหา */
+.cell.target {
+    background: #63e3d9;
+    box-shadow: 0 0 0 4px #ffe27a inset;
+    animation: targetPulse 0.5s ease-in-out infinite alternate;
+}
+
+@keyframes targetPulse {
+    from { transform: scale(1); }
+    to   { transform: scale(0.95); }
+}
+
+/* ตอนวางตัว X/O ให้เด้งนิดหนึ่ง */
+.cell.pop {
+    animation: popIn 0.28s ease-out;
+}
+
+@keyframes popIn {
+    0%   { transform: scale(0.5); }
+    70%  { transform: scale(1.12); }
+    100% { transform: scale(1); }
+}
+
+#memory {
+    margin: 12px 0;
+    font-size: 13px;
+}
+
+#newGame {
+    border: 0;
+    border-radius: 12px;
+    padding: 12px 25px;
+    font-size: 16px;
+    font-weight: bold;
+    background: #8de1da;
+    color: #0e3835;
+    cursor: pointer;
+    transition: background 0.12s, transform 0.12s;
+}
+
+#newGame:hover {
+    background: #b5f0eb;
+}
+
+#newGame:active {
+    transform: scale(0.96);
+}

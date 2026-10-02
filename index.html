@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ninjuay XO (Fly, แมลง)</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <main class="game" id="game">
+
+        <button id="soundBtn" title="เปิด/ปิดเสียง">🔊</button>
+
+        <h1>NINJUAY XO</h1>
+
+        <div class="subtitle">
+            🪰 Ninjuay (Fly, แมลง)
+        </div>
+
+        <div id="status">
+            กำลังเตรียม Ninjuay...
+        </div>
+
+        <div class="scoreboard">
+            <div>
+                <span>คุณ</span>
+                <strong id="humanScore">0</strong>
+            </div>
+
+            <div>
+                <span>เสมอ</span>
+                <strong id="drawScore">0</strong>
+            </div>
+
+            <div>
+                <span>Ninjuay (Fly, แมลง) 🪰</span>
+                <strong id="aiScore">0</strong>
+            </div>
+        </div>
+
+        <div class="fly-stage" id="flyStage">
+            <div class="fly-name">NINJUAY (Fly, แมลง)</div>
+        </div>
+
+        <div id="board" class="board">
+
+            <button class="cell" data-index="0"></button>
+            <button class="cell" data-index="1"></button>
+            <button class="cell" data-index="2"></button>
+
+            <button class="cell" data-index="3"></button>
+            <button class="cell" data-index="4"></button>
+            <button class="cell" data-index="5"></button>
+
+            <button class="cell" data-index="6"></button>
+            <button class="cell" data-index="7"></button>
+            <button class="cell" data-index="8"></button>
+
+        </div>
+
+        <div id="memory">
+            🧠 Ninjuay Memory: 0 states
+        </div>
+
+        <button id="newGame">
+            เล่นเกมใหม่
+        </button>
+
+        <!-- แมลงวันบินได้ทั่วหน้าจอเกม (ลอยอยู่เหนือกระดาน) -->
+        <div id="fly"><span id="flyBody">🪰</span></div>
+
+    </main>
+
+    <script src="game.js"></script>
+
+</body>
+</html>
